@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct x
+{
+	int u;
+	struct x *pl;
+	struct x *pr;
+}TREE,*pTREE;
+typedef struct lb
+{
+	pTREE a;
+	struct lb * pn;
+}NODE,*pNODE;
+typedef struct z
+{
+	pNODE pTOP;
+	pNODE pBOTTOM;
+}STACK,* pSTACK;
+void init(pSTACK ps)
+{
+	ps->pTOP=(pNODE)malloc(sizeof(NODE));
+	ps->pBOTTOM=ps->pTOP;
+	ps->pTOP->pn=NULL;
+}
+void push(pSTACK ps,pTREE val)
+{
+	pNODE pNEW=(pNODE)malloc(sizeof(NODE));
+	if(NULL==pNEW)
+	{
+		exit(-1);
+	}
+	pNEW->a=val;
+	pNEW->pn=ps->pTOP;
+	ps->pTOP=pNEW;
+}
+int pop(pSTACK ps)
+{
+	int e=ps->pTOP->a->u;
+	ps->pTOP=ps->pTOP->pn;
+	return e;
+}
+bool iskong(pSTACK ps)
+{
+	if(ps->pTOP==ps->pBOTTOM)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+void bl(pSTACK ps)
+{
+	pNODE pt;
+	pt=ps->pTOP;
+	while(pt->pn!=NULL)
+	{
+		printf("%d ",pt->a);
+		pt=pt->pn;
+	}
+	printf("\n");
+}
+void cxbl(pTREE t);
+{
+	STACK s;
+	pSTACK ps=&s;
+	int e;
+	init(&s);
+	pTREE pt;
+	pt=t;
+	while()
+	{
+		push(&s,pt);
+		if(pt->pl)
+		{
+			push(&s,pt->pl);
+		}
+		if(pt->pr)
+		{
+			push(&s,pt->pr);
+		}
+		pop(&s);
+		pt=ps->pTOP;
+	}
+}
+
+	

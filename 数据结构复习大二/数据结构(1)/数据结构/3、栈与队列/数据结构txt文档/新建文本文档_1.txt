@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct z
+{
+	int val;
+	struct z *pn;
+}NODE,*pNODE;
+pNODE create_lb(int a[],int size)
+{
+	pNODE ph=(pNODE)malloc(sizeof(NODE));
+	if(NULL==ph)
+	{
+		exit(-1);
+	}
+	ph->pn=NULL;
+	pNODE pt=ph;
+	int i=0;
+	while(i<size)
+	{
+		pNODE pNEW=(pNODE)malloc(sizeof(NODE));
+		if(NULL==pNEW)
+		{
+			exit(-1);
+		}
+		pNEW->val=a[i];
+		pNEW->pn=NULL;
+		pt->pn=pNEW;
+		pt=pNEW;
+		i++;
+	}
+	return ph;
+}
+int find_dj(pNODE ps,int k)
+{
+	pNODE pt=ps->pn;
+	int s=0;
+	while(s<k);
+	{
+		pt=pt->pn;
+		s++;
+	}
+	return (pt->val);
+}
+void bl(pNODE ps)
+{
+	pNODE pt=ps->pn;
+	while(pt!=NULL)
+	{
+		printf("%d ",pt->val);
+		pt=pt->pn;
+	}
+	printf("\n");
+}
+int main()
+{
+	pNODE ph=(pNODE)malloc(sizeof(NODE));
+	if(NULL==ph)
+	{
+		exit(-1);
+	}
+	int a[10]={0};
+	int i,b;
+	for(i=0;i<10;i++)
+	{
+		scanf("%d",&a[i]);
+	}
+	ph=create_lb(a,10);
+	bl(ph);
+	b=find_dj(ph,8);
+	printf("%d",b);
+	return 0;
+}
+	
+

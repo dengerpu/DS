@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct lb
+{
+	int a;
+	struct lb * pn;
+}NODE,*pNODE;
+typedef struct z
+{
+	pNODE pTOP;
+	pNODE pBOTTOM;
+}STACK,* pSTACK;
+void init(pSTACK ps)
+{
+	ps->pTOP=(pNODE)malloc(sizeof(NODE));
+	ps->pBOTTOM=ps->pTOP;
+	ps->pTOP->pn=NULL;
+}
+void push(pSTACK ps,int val)
+{
+	pNODE pNEW=(pNODE)malloc(sizeof(NODE));
+	if(NULL==pNEW)
+	{
+		exit(-1);
+	}
+	pNEW->a=val;
+	pNEW->pn=ps->pTOP;
+	ps->pTOP=pNEW;
+}
+void pop(pSTACK ps)
+{
+	ps->pTOP=ps->pTOP->pn;
+}
+void bl(pSTACK ps)
+{
+	pNODE pt;
+	pt=ps->pTOP;
+	while(pt->pn!=NULL)
+	{
+		printf("%d",pt->a);
+		pt=pt->pn;
+	}
+}
+int main()
+{
+	STACK s;
+	init(&s);
+	push(&s,1);
+	bl(&s);
+	printf("\n");
+	push(&s,2);
+	bl(&s);
+	printf("\n");
+	pop(&s);
+	bl(&s);
+	printf("\n");
+}
+

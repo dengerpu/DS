@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct z
+{
+	int val;
+	struct z *pn;
+}NODE,*pNODE;
+typedef struct dl
+{
+	pNODE front;
+	pNODE rear;
+}DL,*pDL;
+void init(pDL ps)
+{
+	ps->front=(pNODE)malloc(sizeof(NODE));
+	ps->front->val=0;
+	ps->front->pn=NULL;
+	ps->rear=ps->front->pn;
+}
+void rd(pDL ps,int s)
+{
+	pNODE pNEW=(pNODE)malloc(sizeof(NODE));
+	if(NULL==pNEW)
+	{
+		exit(-1);
+	}
+	pNEW->val=s;
+	pNEW->pn=NULL;
+	ps->rear->pn=pNEW;
+	ps->rear=pNEW;
+}
+int cd(pDL ps)
+{
+	int e=ps->front->pn->val;
+	ps->front->pn->val=0;
+	free(ps->front);
+	return e;
+}
+void bl(pDL ps)
+{
+	pNODE pt=ps->front->pn;
+	while(pt!=NULL)
+	{
+		printf("%d",pt->val);
+		pt=pt->pn;
+	}
+	printf("\n");
+}
+int main()
+{
+	DL k;
+	//init(&k);
+	rd(&k,1);
+	rd(&k,2);
+	bl(&k);
+	return 0;
+}
